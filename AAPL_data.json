@@ -2,16 +2,16 @@
     "Meta Data": {
         "1. Information": "Monthly Prices (open, high, low, close) and Volumes",
         "2. Symbol": "AAPL",
-        "3. Last Refreshed": "2024-11-20",
+        "3. Last Refreshed": "2024-11-21",
         "4. Time Zone": "US/Eastern"
     },
     "Monthly Time Series": {
-        "2024-11-20": {
+        "2024-11-21": {
             "1. open": "220.9650",
             "2. high": "230.1600",
             "3. low": "219.7100",
-            "4. close": "229.0000",
-            "5. volume": "613245298"
+            "4. close": "228.5200",
+            "5. volume": "653684511"
         },
         "2024-10-31": {
             "1. open": "229.5200",
