@@ -1,4 +1,3 @@
-import pandas as pd
 import requests
 import json
 import os
@@ -11,10 +10,19 @@ def get_stock_data(ticker):
     params = {'function' : 'TIME_SERIES_MONTHLY', 'symbol' : ticker, 'apikey' : API_KEY}
 
     files = os.listdir('.')
+    
+    folder = ticker
 
-    file = f"{ticker}_data.json"
+    if folder in files:
+        print("Stock Folder Exists")
+    else: 
+        os.makedirs(ticker)
 
-    if file in files:
+    stock_files = os.listdir(ticker)
+
+    file = os.path.join(ticker, f"{ticker}_data.json")
+
+    if f"{ticker}_data.json" in stock_files:
         print(f"Cached Data Accessible")
     else:   
         response = requests.get(url, params = params)
@@ -31,7 +39,9 @@ def get_stock_data(ticker):
 
 def stock_data_to_dict(ticker, year):
 
-    with open(f"{ticker}_data.json", 'r') as infile:
+    file = os.path.join(ticker, f"{ticker}_data.json")
+
+    with open(file, 'r') as infile:
         data = json.load(infile)
 
     out_dict = {}
@@ -79,7 +89,7 @@ def insert_stock_data(ticker, cur, conn, data):
             (ticker_id, open_price, high, low, close, volume, month, year) 
             VALUES (?,?,?,?,?,?,?,?)
             """, 
-            (ticker_id, info[0], info[1], info[2], info[3], info[4], month, year)
+            (ticker_id, info[0], info[1], info[2], info[3], info[4], int(month), int(year))
         )
 
     conn.commit()
